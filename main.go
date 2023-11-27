@@ -5,17 +5,23 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 )
 
 var hostname string
+var mutex = &sync.Mutex{}
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	//To enable only one request is being processed at a time; Locking the function
+	mutex.Lock()
 	// Simulate CPU-intensive work for 5 seconds
 	time.Sleep(5 * time.Second)
 	// Send message to the client with the hostname of the server
 	message := fmt.Sprintf("Connected to server at %s\n", hostname)
 	w.Write([]byte(message))
+	//Unlocking the function
+	mutex.Unlock()
 }
 
 func main() {
