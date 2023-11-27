@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapplication-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapplication
+  template:
+    metadata:
+      labels:
+        app: webapplication
+    spec:
+      containers:
+        - name: webapplication
+          image: rt007/go-web:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapplication-service
+spec:
+  selector:
+    app: webapplication
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
