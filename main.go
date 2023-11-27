@@ -2,26 +2,19 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+	"net"
 	"os"
-	"sync"
 	"time"
 )
 
 var hostname string
-var mutex = &sync.Mutex{}
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	//To enable only one request is being processed at a time; Locking the function
-	mutex.Lock()
-	// Simulate CPU-intensive work for 5 seconds
+func handleConnection(conn net.Conn) {
+	defer conn.Close()
 	time.Sleep(5 * time.Second)
-	// Send message to the client with the hostname of the server
-	message := fmt.Sprintf("Connected to server at %s\n", hostname)
-	w.Write([]byte(message))
-	//Unlocking the function
-	mutex.Unlock()
+	// Send a simple HTTP response to the client
+	response := "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h2>Server's Hostname is " + hostname + "</h2>\n"
+	conn.Write([]byte(response))
 }
 
 func main() {
@@ -33,8 +26,24 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Printf("Hostname: %s\n", hostname)
-	// This is to handle each and every request and then hand off to the socket(Which GO lang does internally)
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// Start the server on port 8080
+	ln, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		fmt.Println("Error listening:", err)
+		return
+	}
+	defer ln.Close()
+
+	fmt.Println("Server listening on :8080")
+
+	for {
+		// Accept a connection and start a new goroutine to handle it
+		conn, err := ln.Accept()
+		if err != nil {
+			fmt.Println("Error accepting connection:", err)
+			continue
+		}
+
+		go handleConnection(conn)
+	}
 }
