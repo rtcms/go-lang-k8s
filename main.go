@@ -4,17 +4,23 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"sync"
 	"time"
 )
 
 var hostname string
+var mutex = &sync.Mutex{}
 
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
+	//To Lock and process single Request ata time
+	mutex.Lock()
 	time.Sleep(5 * time.Second)
 	// Send a simple HTTP response to the client
 	response := "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h2>Server's Hostname is " + hostname + "</h2>\n"
 	conn.Write([]byte(response))
+	//To Unlock the thread
+	mutex.Unlock()
 }
 
 func main() {

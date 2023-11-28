@@ -9,3 +9,5 @@ destroy:
 	kubectl delete -f Deployment/deployment.yaml
 	minikube service webapplication-service --url
 
+client:
+	bashclient.sh
