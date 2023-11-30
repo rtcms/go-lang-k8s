@@ -10,4 +10,4 @@ destroy:
 	kubectl delete -f Deployment/deployment.yaml
 
 client:
-	bashclient.sh
+	bash client.sh
