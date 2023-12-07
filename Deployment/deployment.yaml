@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: go-web-deployment
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -25,6 +26,21 @@ spec:
             limits:
               memory: 512M
               cpu: '0.5'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-web-client
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-web-client
+    spec:
+      containers:
+        - name: go-web
+          image: 'rt007/go-web-client:latest'
 ---
 apiVersion: v1
 kind: Service

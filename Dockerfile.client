@@ -1,0 +1,9 @@
+FROM alpine:latest
+WORKDIR /app
+COPY ./client-src/client.sh .
+#Make the script executable
+RUN chmod +x /app/client.sh
+# Install curl (if not already present in the base image)
+RUN apk add --no-cache curl
+# Run the Bash script when the container starts
+CMD ["/app/client.sh"]
