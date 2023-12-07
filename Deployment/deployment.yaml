@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-web-Deployment
+  name: go-web-deployment
 spec:
   replicas: 1
   selector:
@@ -25,8 +25,6 @@ spec:
             limits:
               memory: 512M
               cpu: '0.5'
-          securityContext:
-            runAsNonRoot: true
 ---
 apiVersion: v1
 kind: Service

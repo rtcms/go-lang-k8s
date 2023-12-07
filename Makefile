@@ -3,7 +3,7 @@ build:
 
 run: build
 	kubectl apply -f Deployment/deployment.yaml
-	minikube service webapplication-service --url
+	minikube service go-web-service --url
 
 destroy:
 	sudo docker rmi rt007/go-web:latest
