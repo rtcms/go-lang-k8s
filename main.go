@@ -14,15 +14,17 @@ var mutex = &sync.Mutex{}
 
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
+	fmt.Println("Received a request from client ")
 	//To Lock and process single Request ata time
 	mutex.Lock()
+	fmt.Println("Serving a client connection ")
 	startTime := time.Now()
 	for time.Since(startTime) < 5*time.Second {
 		// Busy-wait, doing nothing
 	}
 
 	// Send a simple HTTP response to the client
-	response := "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h2>Server's Hostname is " + hostname + "</h2>\n"
+	response := "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\n\r\n\r\n<h2>Server's Hostname is " + hostname + "</h2>\n"
 	conn.Write([]byte(response))
 	//To Unlock the thread
 	mutex.Unlock()

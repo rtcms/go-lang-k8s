@@ -7,7 +7,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # Start a new stage for the second Dockerfile
-FROM alpine:latest
+FROM scratch
 # Set the working directory to /app
 WORKDIR /app
 # Copy the binary from the builder stage to the second stage
