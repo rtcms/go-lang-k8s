@@ -30,16 +30,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-web-client
+  name: go-client-deployment
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: go-web-client
+  template:
+    metadata:
+      labels:
+        app: go-web-client
     spec:
       containers:
-        - name: go-web
+        - name: go-web-client
           image: 'rt007/go-web-client:latest'
 ---
 apiVersion: v1
