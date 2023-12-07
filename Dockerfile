@@ -2,7 +2,7 @@ FROM golang:1.21.4-bullseye as builder
 # Set the working directory to /app
 WORKDIR /app
 # Copy the current directory contents into the container at /app
-COPY ./src/* .
+COPY ./server-src/* .
 # Build the Go binary
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
