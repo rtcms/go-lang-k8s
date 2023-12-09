@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "go-web.fullname" . }}
+  name: {{ include "go-web-server.fullname" . }}
   labels:
-    {{- include "go-web.labels" . | nindent 4 }}
+    {{- include "go-web-server.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service-server.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service-server.port }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    {{- include "go-web.selectorLabels" . | nindent 4 }}
+    {{- include "go-web-server.selectorLabels" . | nindent 4 }}

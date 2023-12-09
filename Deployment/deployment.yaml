@@ -17,14 +17,14 @@ spec:
         - name: go-web
           image: 'rt007/go-web:latest'
           ports:
-            - name: server
+            - name: go-web-deployment
               containerPort: 8080
           resources:
             requests:
-              memory: 256M
+              memory: 128M
               cpu: '250m'
             limits:
-              memory: 512M
+              memory: 256M
               cpu: '500m'
 ---
 apiVersion: apps/v1
@@ -50,6 +50,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: go-web-service
+  namespace: default
 spec:
   selector:
     app: go-web
