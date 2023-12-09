@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: "go-web-client"
+  repository: "rt007/go-web-client"
   tag: "latest"
   pullPolicy: "IfNotPresent"
 
