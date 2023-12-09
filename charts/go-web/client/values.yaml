@@ -1,0 +1,15 @@
+#Default Replica Count for all deployments
+replicaCount: 1
+
+#Common Values
+
+image:
+  repository: "go-web-client"
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+go-web:
+  fullname: go-client
+  labels:
+    app: go-web-client
+  selectorLabels:
+    app: go-web-client
