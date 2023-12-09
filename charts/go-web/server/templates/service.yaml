@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "go-web.selectorLabels" . | nindent 4 }}
+    {{- include "go-web-server.selectorLabels" . | nindent 4 }}

@@ -1,14 +1,6 @@
 #Default Replica Count for all deployments
 replicaCount: 1
 
-go-web-server:
-  fullname: go-server
-  labels:
-    app: go-web-server
-  selectorLabels:
-    app: go-web-server
-
-
 #Resources values
 resources:
   requests:
