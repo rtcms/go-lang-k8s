@@ -7,7 +7,7 @@ image:
   repository: "go-web-client"
   tag: "latest"
   pullPolicy: "IfNotPresent"
-go-web:
+go-web-client:
   fullname: go-client
   labels:
     app: go-web-client
