@@ -13,21 +13,23 @@ image:
     tag: "latest"
     pullPolicy: "IfNotPresent"
 
-#-------------------------------Client Config Values-------------------------------
-go-web-client:
-  fullname: go-client
-  labels:
-    app: go-web-client
-  selectorLabels:
-    app: go-web-client
 
-#-------------------------------Server Config Values-------------------------------
-go-web-server:
-  fullname: go-server
-  labels:
-    app: go-web-server
-  selectorLabels:
-    app: go-web-server
+
+#------------------------------- Config Values-------------------------------
+go-web:
+  server:
+    fullname: go-server
+    labels:
+      app: go-web-server
+    selectorLabels:
+      app: go-web-server
+  client:
+    fullname: go-client
+    labels:
+      app: go-web-client
+    selectorLabels:
+      app: go-web-client
+
 
 #Resources values
 resources:

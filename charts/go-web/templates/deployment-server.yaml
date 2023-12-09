@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "go-web-server.fullname" . }}
+  name: {{ include "go-web.server.fullname" . }}
   labels:
-    {{- include "go-web-server.labels" . | nindent 4 }}
+    {{- include "go-web.server.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.server.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "go-web-server.selectorLabels" . | nindent 6 }}
+      {{- include "go-web.server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "go-web-server.labels" . | nindent 8 }}
+        {{- include "go-web.server.labels" . | nindent 8 }}
 	{{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "go-web-server.serviceAccountName" . }}
+      serviceAccountName: {{ include "go-web.server.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -38,7 +38,7 @@ spec:
           imagePullPolicy: {{ .Values.image.server.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service-client.port }}
+              containerPort: {{ .Values.service.server.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
