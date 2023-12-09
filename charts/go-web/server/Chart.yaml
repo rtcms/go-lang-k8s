@@ -1,6 +1,6 @@
 apiVersion: v2
-name: go-web
-description: A Helm chart to deploy a server and client
+name: go-web-server
+description: A Server written in Go lang
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -22,12 +22,3 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
-dependencies:
-  - alias: go-web-server
-    name: go-web-server
-    version: "0.1.0"
-    repository: file://server
-  - alias: go-web-client
-    name: go-web-client
-    version: "0.1.0"
-    repository: file://client
