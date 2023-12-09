@@ -24,7 +24,7 @@ func handleConnection(conn net.Conn) {
 	}
 
 	// Send a simple HTTP response to the client
-	response := "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\n\r\n\r\n<h2>Server's Hostname is " + hostname + "</h2>\n"
+	response := "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\n\r\n\r\nServer's Hostname is " + hostname + "\n"
 	conn.Write([]byte(response))
 	//To Unlock the thread
 	mutex.Unlock()
