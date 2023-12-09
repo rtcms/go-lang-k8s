@@ -34,8 +34,8 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image-client.repository }}:{{ .Values.image-client.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image-client.pullPolicy }}
+          image: "{{ .Values.image.client.repository }}:{{ .Values.image.client.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.client.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

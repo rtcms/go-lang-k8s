@@ -5,9 +5,9 @@ metadata:
   labels:
     {{- include "go-web-server.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service-server.type }}
+  type: {{ .Values.service.server.type }}
   ports:
-    - port: {{ .Values.service-server.port }}
+    - port: {{ .Values.service.server.port }}
       targetPort: http
       protocol: TCP
       name: http

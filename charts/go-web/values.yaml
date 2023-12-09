@@ -1,12 +1,19 @@
 #Default Replica Count for all deployments
 replicaCount: 1
 
-#-------------------------------Client Config Values-------------------------------
-image-client:
-  repository: "go-web-client"
-  tag: "latest"
-  pullPolicy: "IfNotPresent"
+#Common Values
 
+image:
+  server:
+    repository: "rt007/go-web"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+  client:
+    repository: "go-web-client"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+
+#-------------------------------Client Config Values-------------------------------
 go-web-client:
   fullname: go-client
   labels:
@@ -15,13 +22,6 @@ go-web-client:
     app: go-web-client
 
 #-------------------------------Server Config Values-------------------------------
-
-#Server Image values
-image-server:
-  repository: "rt007/go-web"
-  tag: "latest"
-  pullPolicy: "IfNotPresent"
-
 go-web-server:
   fullname: go-server
   labels:
@@ -30,25 +30,28 @@ go-web-server:
     app: go-web-server
 
 #Resources values
-resources-server:
-  requests:
-    memory: "128Mi"
-    cpu: "250m"
-  limits:
-    memory: "256Mi"
-    cpu: "500m"
+resources:
+  server:
+    requests:
+      memory: "128Mi"
+      cpu: "250m"
+    limits:
+      memory: "256Mi"
+      cpu: "500m"
 
 #service values
-service-server:
-  type: ClusterIP
-  port: 80
+service:
+  server:
+    type: ClusterIP
+    port: 80
 
 #HPA Values
-autoscaling-server:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 70
-  targetMemoryUtilizationPercentage: 30
+autoscaling:
+  server:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 30
 
 
