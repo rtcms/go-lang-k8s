@@ -11,7 +11,7 @@ image:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "go-web-client"
 
 serviceAccount:
   # Specifies whether a service account should be created

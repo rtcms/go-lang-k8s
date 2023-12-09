@@ -10,7 +10,7 @@ while true; do
     echo "Curl request is being sent to http://go-web-service.default.svc.cluster.local, Request no $counter"
 
     # Perform curl requests in parallel and run them in the background
-    curl -s "http://go-web-service.default.svc.cluster.local" &
+    curl -s "http://go-web-server.default.svc.cluster.local" &
 
     # Wait for a 2-second interval before starting the next iteration
     sleep 2
